@@ -1,0 +1,21 @@
+cuda_visible_devices: "1"
+start_index: 0
+test_clip_num: 20
+data_dir: "data/preprocessed/libero_10"
+results_dir: "eval/libero_10/dynamics"
+model: "DynamicsModel-B"
+eye_in_hand: false
+flow_horizon: 16
+obs_history: 4
+img_size: [128, 128]
+flow_normalize: false
+lr: 1e-4
+vae_encode: true
+epochs: 50000
+vae: "ema"
+seed: 3407
+num_workers: 16
+eval_diffusion_step: 300
+learn_sigma: true
+ckpt_path: models/libero_10/agentview_dynamics.pt
+vae_ckpt_path: models/libero_10/agentview_vae.pt

@@ -1,0 +1,200 @@
+log
+*.egg-info
+__pycache__/
+wandb
+data/
+
+# pycharm configs
+.idea/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+.DS_Store
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+develop-eggs/
+dist/
+eggs/
+.eggs/
+lib/
+lib64/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+
+# Flask stuff:
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+
+# pyenv
+.python-version
+
+# SageMath parsed files
+*.sage.py
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mypy
+.mypy_cache/
+*.pth
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+#
+*.zip
+
+# Distribution / packaging
+.Python
+develop-eggs/
+eggs/
+.eggs/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+
+# Flask stuff:
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# pyenv
+.python-version
+
+# celery beat schedule file
+celerybeat-schedule
+
+# SageMath parsed files
+*.sage.py
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+# mypy
+.mypy_cache/
+
+# mac
+.DS_Store
+
+.idea
+
+.pytest_cache/
+experiments/
+results/
+dynamics_results/
+resnet50/
+finetune_liv/
+Meta-Llama-3.1-8B/
+fine_tuned_vae_decoder/
+output/
+/models/
+cvae_results/
+policy_results/
+policy_eval/
+eval/
+vis/
+bar.png
+cloth_policy/
+cloth_video_output/
+config/cloth/
+config/tea/
+scripts/train_cloth_policy.py
+scripts/preprocess_data_cloth.py
+scripts/test.py
+flip/network/cloth_policy.py
+flip/dataloader/cloth_policy_dataloader.py
+config/libero_10/dp.yaml
+config/libero_10/policy_eval.yaml
+flip/dataloader/policy_dataloader.py
+flip/network/policy.py
+scripts/eval_policy.py
+scripts/preprocess_data_sa.py
+config/libero_10/preprocess_sa.yaml
+scripts/train_policy.py

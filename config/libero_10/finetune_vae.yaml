@@ -1,0 +1,11 @@
+data_dir: "data/preprocessed/libero_10"
+obs_history: 16
+flow_horizon: 16
+epochs: 1000
+cuda_visible_devices: "0,1,2,3,4,5,6,7"
+global_batch_size: 16
+lr: 1e-4
+num_workers: 4
+save_dir: "fine_tuned_vae_decoder/libero_10"
+eval_every: 1000
+vae: "ema"

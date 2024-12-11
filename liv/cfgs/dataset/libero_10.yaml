@@ -1,0 +1,6 @@
+dataset: libero_10
+datapath_train: data/liv_frames
+wandbproject: liv_finetune_libero_10
+hydra:
+  job:
+    name: train_liv_libero_10

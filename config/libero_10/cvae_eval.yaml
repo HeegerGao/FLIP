@@ -1,0 +1,19 @@
+device: "cuda:0"
+data_dir: "data/preprocessed/libero_10"
+model: "CVAE-B"
+results_dir: "eval/libero_10/cvae"
+eye_in_hand: false
+flow_horizon: 16
+obs_history: 16
+img_patch_size: 8
+img_size: [128, 128]
+calculate_scale_and_direction: true
+data_aug: false
+grid_pt_num: 529
+seed: 666
+num_workers: 16
+ckpt: models/libero_10/cvae.pt
+use_gt_query_points: false
+use_z_mu: false
+start_index: 0
+test_clip_num: 20

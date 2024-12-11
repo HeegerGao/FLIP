@@ -1,0 +1,10 @@
+device: cuda:0
+source_dir: data/libero_10
+new_imge_size: [128, 128]
+point_num: 529
+clip_length: 16
+tracker_dir: flip/co_tracker
+save_tensor_dir: data/tracked_results
+save_video: false
+save_video_dir: data/tracked_videos
+eye_in_hand: false

@@ -1,0 +1,7 @@
+data_dir: data/tracked_results/libero_10
+output_dir: data/preprocessed/libero_10
+obs_history: 16
+flow_horizon: 16
+img_size: [128, 128]
+eye_in_hand: false
+process_sentence_embedding: true
