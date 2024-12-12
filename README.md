@@ -7,7 +7,7 @@ Official Code Repository for **FLIP: Flow-Centric Generative Planning for Genera
 <sup>1</sup>National University of Singapore, <sup>2</sup>Peking University
 
 <p align="center">
-    <a href='https://nus-lins-lab.github.io/flipweb/'>
+    <a href='https://arxiv.org/abs/2412.08261'>
       <img src='https://img.shields.io/badge/Paper-arXiv-red?style=plastic&logo=arXiv&logoColor=red' alt='Paper arXiv'>
     </a>
     <a href='https://nus-lins-lab.github.io/flipweb/'>
