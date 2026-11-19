@@ -17,7 +17,7 @@ def vis_pred_flow(init_img, flow):
     init_img = init_img.clone().permute(1,2,0).detach().cpu().numpy()
     predicted_flow = flow[0].clone().detach().cpu().numpy()
 
-    color_map = cm.get_cmap("gist_rainbow")
+    color_map = plt.get_cmap("gist_rainbow")
     N = predicted_flow.shape[0]
     T = predicted_flow.shape[1]
     

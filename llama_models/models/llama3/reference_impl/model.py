@@ -28,6 +28,14 @@ from ..api import ModelArgs
 # (requirements.txt) of the `llama-models` package.
 
 
+def _default_device():
+    if torch.cuda.is_available():
+        return torch.device("cuda")
+    if hasattr(torch, "xpu") and torch.xpu.is_available():
+        return torch.device("xpu")
+    return torch.device("cpu")
+
+
 class RMSNorm(torch.nn.Module):
     def __init__(self, dim: int, eps: float = 1e-6):
         super().__init__()
@@ -158,7 +166,7 @@ class Attention(nn.Module):
                 self.n_local_kv_heads,
                 self.head_dim,
             )
-        ).cuda()
+        ).to(_default_device())
         self.cache_v = torch.zeros(
             (
                 args.max_batch_size,
@@ -166,7 +174,7 @@ class Attention(nn.Module):
                 self.n_local_kv_heads,
                 self.head_dim,
             )
-        ).cuda()
+        ).to(_default_device())
 
     def forward(
         self,

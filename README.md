@@ -79,6 +79,24 @@ wget https://huggingface.co/facebook/cotracker/resolve/main/cotracker2.pth
 ...
 ```
 
+### 6. Run on Intel GPU (XPU)
+
+The testing scripts (`scripts/hill_climbing.py`, `scripts/eval_cvae.py` and `scripts/eval_dynamics.py`) also run on Intel GPUs. With Python 3.13, install PyTorch for XPU, then the dependencies without the CUDA pins:
+
+```
+pip install torch torchvision --index-url https://download.pytorch.org/whl/xpu
+pip install -r requirements-xpu.txt
+pip install --no-deps --no-build-isolation -e liv/models/clip
+```
+
+The device is picked automatically (CUDA, then XPU, then CPU); `scripts/hill_climbing.py` also takes `--device xpu`. `load_llama` keeps Llama 3.1 8B in float32; on a GPU that cannot hold it next to the other modules, compute the sentence embeddings on the CPU with `--llama_device cpu`:
+
+```
+python -m torch.distributed.run --nproc_per_node=1 scripts/hill_climbing.py --device xpu --llama_device cpu
+```
+
+Training, data preparation (`scripts/video_tracking.py`, `scripts/extract_language_embedding.py`) and multi-GPU launches stay CUDA-only.
+
 ## Data Preparation
 
 ### 1. Download the LIBERO-LONG Dataset

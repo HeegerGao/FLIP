@@ -13,17 +13,17 @@ import argparse
 from flip.dataloader.flip_dataloader import FLIPDataset
 from torch.utils.data import DataLoader
 from einops import rearrange
-from utils.model_utils import load_models, ConfigArgs
+from utils.model_utils import load_models, ConfigArgs, get_default_device
 from utils.yaml_utils import load_config_as_namespace
 from utils.train_utils import save_video
 from utils.data_utils import CustomBatchSampler
 
 def main(cfg):
-    assert torch.cuda.is_available(), "Evaluating requires at least one GPU."
+    assert get_default_device().type != "cpu", "Evaluating requires at least one GPU."
     # Setup PyTorch:
     torch.manual_seed(cfg.seed)
     torch.set_grad_enabled(False)
-    device = "cuda:0"
+    device = "cuda:0" if torch.cuda.is_available() else get_default_device()
 
     # Load model:
     model = DynamicsModel_models[cfg.model](

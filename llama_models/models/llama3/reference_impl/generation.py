@@ -94,7 +94,7 @@ class Llama:
         """
 
         if not torch.distributed.is_initialized():
-            torch.distributed.init_process_group("nccl")
+            torch.distributed.init_process_group("nccl" if torch.cuda.is_available() else "gloo")
 
         if not model_parallel_is_initialized():
             if model_parallel_size is None:
@@ -102,7 +102,8 @@ class Llama:
             initialize_model_parallel(model_parallel_size)
 
         local_rank = int(os.environ.get("LOCAL_RANK", 0))
-        torch.cuda.set_device(local_rank)
+        if torch.cuda.is_available():
+            torch.cuda.set_device(local_rank)
 
         torch.manual_seed(seed)
 

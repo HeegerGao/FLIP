@@ -3,7 +3,7 @@ sys.path.append(".")
 sys.path.append("..")
 import torch
 import torch.nn as nn
-from utils.model_utils import load_models
+from utils.model_utils import load_models, get_default_device
 from flip.network.cvae import CVAE_models
 from diffusers.models import AutoencoderKL
 from flip.network.dynamics import DynamicsModel_models
@@ -69,7 +69,7 @@ def load_reward_model(ckpt_folder_path, model_path, device, load_from_official=F
         config = copy.deepcopy(modelcfg)
         config["device"] = device
         # model = hydra.utils.instantiate(config).to(device)
-        model = LIV().to(device)
+        model = LIV(device=device).to(device)
 
         payload = torch.load(model_path, map_location=torch.device(device))
         model.load_state_dict(payload['liv'])
@@ -81,7 +81,7 @@ def load_reward_model(ckpt_folder_path, model_path, device, load_from_official=F
 
         return model
 
-def load_llama(ckpt_dir = "Meta-Llama-3.1-8B", tokenizer_path = "Meta-Llama-3.1-8B/tokenizer.model", max_seq_len = 512, max_batch_size = 1, model_parallel_size = None):
+def load_llama(ckpt_dir = "Meta-Llama-3.1-8B", tokenizer_path = "Meta-Llama-3.1-8B/tokenizer.model", max_seq_len = 512, max_batch_size = 1, model_parallel_size = None, device = None):
     llama = Llama.build(
         ckpt_dir=ckpt_dir,
         tokenizer_path=tokenizer_path,
@@ -90,7 +90,7 @@ def load_llama(ckpt_dir = "Meta-Llama-3.1-8B", tokenizer_path = "Meta-Llama-3.1-
         model_parallel_size=model_parallel_size,
     )
     llama.model = llama.model.float()
-    llama.model = llama.model.to("cuda:0")
+    llama.model = llama.model.to(device if device is not None else get_default_device())
 
     return llama
 
@@ -103,7 +103,7 @@ def get_sentence_embedding(llama, sentence):
     encoded_input = llama.tokenizer.encode(sentence, bos=True, eos=False)
 
     with torch.inference_mode():
-        tokens = torch.tensor([encoded_input], dtype=torch.long, device="cuda:0")
+        tokens = torch.tensor([encoded_input], dtype=torch.long, device=next(llama.model.parameters()).device)
         logits = llama.model.forward(tokens, 0)
 
     sentence_embedding = h_embedding.clone()    # use the last hidden layer's output as the sentence embedding

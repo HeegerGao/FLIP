@@ -11,6 +11,8 @@ from liv.models.model_liv import LIV
 VALID_ARGS = ["_target_", "device", "lr", "hidden_dim", "size", "l2weight", "l1weight", "num_negatives"]
 if torch.cuda.is_available():
     device = "cuda"
+elif hasattr(torch, "xpu") and torch.xpu.is_available():
+    device = "xpu"
 else:
     device = "cpu"
 
