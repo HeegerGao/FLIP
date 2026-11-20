@@ -1,0 +1,38 @@
+# Dependencies for running the testing scripts on Intel GPUs (XPU).
+# Same list as requirements.txt without torch, torchvision (install them from the XPU index),
+# and without the training-only wandb and transformers. Versions tested with Python 3.13.
+bddl==3.6.0
+cloudpickle==1.6.0
+colorama==0.4.6
+diffusers==0.29.2
+easydict==1.14
+einops==0.8.2
+fairscale==0.4.13
+ftfy==6.3.1
+gdown==6.5.2
+gym==0.17.3
+h5py==3.16.0
+huggingface-hub==0.25.2
+hydra-core==1.3.2
+imageio==2.38.2
+imageio-ffmpeg==0.8.1
+Jinja2==3.1.6
+matplotlib==3.11.2
+moviepy==1.0.3
+mujoco==4.0.1
+numpy==2.5.4
+omegaconf==2.3.0
+opencv-python-headless==5.1.0.95
+pillow==13.0.0
+pydantic==2.14.4
+PyYAML==6.0.3
+regex==2026.11.19
+robosuite==1.4.1
+safetensors==0.8.0
+scikit-image==0.26.0
+scipy==1.18.1
+setuptools==80.10.2
+termcolor==3.3.0
+tiktoken==0.14.0
+timm==1.0.31
+tqdm==4.70.1

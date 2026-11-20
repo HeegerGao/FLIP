@@ -13,7 +13,7 @@ import cv2
 from torchvision import transforms
 from utils.vis_utils import vis_pred_flow, connect_and_save_videos
 from utils.module_utils import generate_query_points
-from utils.model_utils import load_models, ConfigArgs
+from utils.model_utils import load_models, ConfigArgs, get_default_device
 from colorama import Fore, Back, Style, init
 from utils.train_utils import post_process_video
 from glob import glob
@@ -111,7 +111,8 @@ def get_args():
     parser.add_argument("--replace_time", type=int, default=4)
     parser.add_argument("--grid_pt_num", type=int, default=529) # to be a square number
 
-    parser.add_argument("--device", type=str, default="cuda:0") # should always from 0, because we have set the CUDA_VISIBLE_DEVICES
+    parser.add_argument("--device", type=str, default=str(get_default_device())) # should always from 0, because we have set the CUDA_VISIBLE_DEVICES
+    parser.add_argument("--llama_device", type=str, default=None) # defaults to --device; "cpu" keeps Llama 3.1 8B (float32) off a small GPU
     parser.add_argument("--output_dir", type=str, default="output") # should always from 0, because we have set the CUDA_VISIBLE_DEVICES
     parser.add_argument("--vae", type=str, choices=["ema", "mse"], default="ema")
     parser.add_argument("--num-sampling-steps", type=int, default=500)
@@ -130,7 +131,7 @@ if __name__ == "__main__":
     os.makedirs(args.output_dir, exist_ok=True)
 
     # load the models
-    llama_model = load_llama()
+    llama_model = load_llama(device=args.llama_device if args.llama_device is not None else args.device)
 
     flow_model = load_flow_model(args.flow_model_path, args, args.device).eval()
     dynamics_model, vae = load_dynamics_model_and_vae(args.dynamics_model_path, args.vae_path, args, args.device)
@@ -170,7 +171,7 @@ if __name__ == "__main__":
         images.append(image)
 
         with torch.no_grad():
-            sentence_embedding = get_sentence_embedding(llama_model, sentence)
+            sentence_embedding = get_sentence_embedding(llama_model, sentence).to(args.device)
             sentence_embeddings.append(sentence_embedding)
             
     del llama_model # to save memory

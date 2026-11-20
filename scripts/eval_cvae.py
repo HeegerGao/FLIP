@@ -11,16 +11,16 @@ from time import time
 
 from flip.dataloader.flip_dataloader import FLIPDataset
 from flip.network.cvae import CVAE_models
-from utils.model_utils import load_models, ConfigArgs
+from utils.model_utils import load_models, ConfigArgs, get_default_device
 from utils.yaml_utils import load_config_as_namespace
 from utils.vis_utils import vis_pred_flow, connect_and_save_videos
 from utils.data_utils import CustomBatchSampler
 from utils.module_utils import post_process_video
     
 def main(cfg):
-    assert torch.cuda.is_available(), "Evaluating requires at least one GPU."
+    assert get_default_device().type != "cpu", "Evaluating requires at least one GPU."
     torch.set_grad_enabled(False)
-    device = cfg.device
+    device = cfg.device if torch.cuda.is_available() else get_default_device()
 
     seed = cfg.seed
     torch.manual_seed(seed)

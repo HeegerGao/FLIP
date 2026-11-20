@@ -59,6 +59,15 @@ def replace_bn_with_gn(
     return root_module
 
 
+def get_default_device():
+    """Return the first available accelerator (CUDA, then Intel XPU), else the CPU."""
+    if torch.cuda.is_available():
+        return torch.device("cuda")
+    if hasattr(torch, "xpu") and torch.xpu.is_available():
+        return torch.device("xpu")
+    return torch.device("cpu")
+
+
 def load_models(model_name: str):
     assert os.path.isfile(model_name), f'Could not find checkpoint at {model_name}'
     checkpoint = torch.load(model_name, map_location=lambda storage, loc: storage)
